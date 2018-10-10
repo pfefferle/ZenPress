@@ -1,0 +1,115 @@
+video {
+    max-width: 100%;
+}
+
+.video-wrapper {
+    position: relative;
+    z-index: 100;
+}
+
+.video-controls {
+    opacity: 0;
+    transition: opacity .35s ease-out;
+}
+
+.video-controls--show {
+    opacity: 1;
+}
+
+[data-media] {
+    padding: 0;
+    margin: 0;
+    border-radius: 0px;
+    background-color: transparent;
+
+    &:hover {
+      background-color: transparent;
+    }
+}
+
+[data-media="play-pause"] {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 1;
+
+    transition: opacity .35s ease-out;
+
+    .paused & {
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 30px 0 30px 52px;
+        border-color: transparent transparent transparent #fff;
+    }
+    .playing & {
+        width: 52px;
+        height: 60px;
+        border: 16px solid #fff;
+        border-top: none;
+        border-bottom: none;
+    }
+    .hide-playhead & {
+        opacity: 0;
+    }
+}
+.video-wrapper {
+  [data-media="mute-unmute"] {
+      display: inline-block;
+      width: 30px;
+      height: 30px;
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      border: 0;
+      span {
+        display: block;
+        width: 8px;
+        height: 8px;
+        background: #fff;
+        margin: 0 0 0 2px;
+
+        &:after {
+          content: '';
+          position: absolute;
+          width: 0;
+          height: 0;
+          border-style: solid;
+          border-color: transparent #fff transparent transparent;
+          border-width: 10px 14px 10px 15px;
+          left: -13px;
+          top: 5px;
+        }
+
+        &:before {
+          transform: rotate(45deg);
+          border-radius: 0 50px 0 0;
+          content: '';
+          position: absolute;
+          width: 5px;
+          height: 5px;
+          border-style: double;
+          border-color: #fff;
+          border-width: 7px 7px 0 0;
+          left: 18px;
+          top: 9px;
+          transition: all 0.2s ease-out;
+        }
+      }
+      &:hover {
+        span:before {
+          transform: scale(.8) translate(-3px, 0) rotate(42deg);
+        }
+      }
+  }
+  &.muted {
+    [data-media="mute-unmute"] {
+      span:before {
+        transform: scale(.5) translate(-15px, 0) rotate(36deg);
+        opacity: 0;
+      }
+    }
+  }
+}
